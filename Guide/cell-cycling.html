@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The cellcycling module &mdash; GES-echem-suite Documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx-thebe.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script src="../_static/design-tabs.js"></script>
+        <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+        <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Basic file loading operations" href="CellCycling/loading-files.html" />
+    <link rel="prev" title="User guide" href="../user-guide.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../intro.html" class="icon icon-home">
+            Python
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../user-guide.html">User guide</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">The <code class="docutils literal notranslate"><span class="pre">cellcycling</span></code> module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="CellCycling/loading-files.html">Basic file loading operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CellCycling/accessing-data.html">Accessing and computing properities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CellCycling/analyzing-experiments.html">Analyzing complex expriments</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cyclic-voltammetry.html">The <code class="docutils literal notranslate"><span class="pre">echemsuite.cyclicvoltammetry</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="graphicaltools.html">Using the <code class="docutils literal notranslate"><span class="pre">graphicaltools</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributor-guide.html">Contributor’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../release-notes.html">Release notes</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../intro.html">Python</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../intro.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../user-guide.html">User guide</a></li>
+      <li class="breadcrumb-item active">The <code class="docutils literal notranslate"><span class="pre">cellcycling</span></code> module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Guide/cell-cycling.md" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="the-cellcycling-module">
+<span id="cellcyclingmodule"></span><h1>The <code class="docutils literal notranslate"><span class="pre">cellcycling</span></code> module<a class="headerlink" href="#the-cellcycling-module" title="Permalink to this heading"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">echemsuite.cellcycing</span></code> module is dedicated to the analysis of data deriving from the cycling of electrochemical cells.</p>
+<div class="admonition-supported-file-types admonition">
+<p class="admonition-title">Supported file types</p>
+<p>The module currently supports GAMRY <code class="docutils literal notranslate"><span class="pre">.DTA</span></code> single-halfcycle files and Biologic <code class="docutils literal notranslate"><span class="pre">.mpt</span></code> cell-cycling files. The US/European number format conversion is automatically done for all <code class="docutils literal notranslate"><span class="pre">.DTA</span></code> files.</p>
+</div>
+<section id="structure-of-the-module">
+<h2>Structure of the module<a class="headerlink" href="#structure-of-the-module" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">echemsuite.cellcycing</span></code> module is articulated in three sub-modules: <code class="docutils literal notranslate"><span class="pre">read_input</span></code>, which contains the tools required to load and parse experimental data files, <code class="docutils literal notranslate"><span class="pre">cycles</span></code>, in which all the main code objects holding and structuring the experimental data are stored and <code class="docutils literal notranslate"><span class="pre">experiments</span></code> where a set of tools for the analysis of composite cell-cycling experiments are provided.</p>
+<p>Before moving on with the discussion on how to operate the library, let us discuss the organization of the data-structure implemented in the <code class="docutils literal notranslate"><span class="pre">echemsuite.cellcycing.cycles</span></code> sub-module. In general, a cell-cycling experiment consists of a series of charge and discharge operations intended to characterize the properties associated with a given electrochemical cell in terms of time/usage of the device. The <code class="docutils literal notranslate"><span class="pre">echemsuite.cellcycing</span></code> sub-module is organized with the same logic. The cell-cycling experiment is defined by a <code class="docutils literal notranslate"><span class="pre">CellCycling</span></code> class which internally carries a variable number of <code class="docutils literal notranslate"><span class="pre">Cycle</span></code> objects. Each <code class="docutils literal notranslate"><span class="pre">Cycle</span></code> object represents a complete charge/discharge battery cycle and, as such, it is composed by two <code class="docutils literal notranslate"><span class="pre">HalfCycles</span></code>, one for the charge and one for the discharge.</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/cellcycling-scheme1.png"><img alt="CellCyclingScheme1" class="bg-primary mb-1 align-center" src="../_images/cellcycling-scheme1.png" style="width: 600px;" /></a>
+<p>In terms of data, each halfcycle is initialized with the current and voltage time series of the corresponding charge/discharge process and holds all the derived quantities such as accumulated/dissipated charge, instantaneous power, energy, etc. All this data is then exposed to the <code class="docutils literal notranslate"><span class="pre">Cycle</span></code> and <code class="docutils literal notranslate"><span class="pre">CellCycling</span></code> objects for computing derived properties such as
+coulombic/voltaic/energy efficiencies, capacity retention and capacity fade data.</p>
+<p>For a detailed description of all the available features associated with the discussed data-objects, the interested reader is referred to the API documentation for the <a class="reference internal" href="../API/api_cellcycling_cycles.html#api-cellcycling-cycles"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">cycles</span></code> sub-module</span></a>.</p>
+<section id="using-the-module">
+<h3>Using the module<a class="headerlink" href="#using-the-module" title="Permalink to this heading"></a></h3>
+<p>A set of simple tutorials covering the basic operations of the package is also provided.
+The list of available tutorials is as follows:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="CellCycling/loading-files.html#cellcycling-loading"><span class="std std-ref">Loading data from a cycling experimental file</span></a></p></li>
+<li><p><a class="reference internal" href="CellCycling/accessing-data.html#cellcycling-accessingdata"><span class="std std-ref">Accessing the experimental data and derived quantities</span></a></p></li>
+<li><p><a class="reference internal" href="CellCycling/analyzing-experiments.html#cellcycling-analyzingexperiment"><span class="std std-ref">Analyzing complex experiments</span></a></p></li>
+</ul>
+</section>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Guide"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../user-guide.html" class="btn btn-neutral float-left" title="User guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="CellCycling/loading-files.html" class="btn btn-neutral float-right" title="Basic file loading operations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accessing and computing properities &mdash; GES-echem-suite Documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sphinx-thebe.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script src="../../_static/design-tabs.js"></script>
+        <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+        <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Analyzing complex expriments" href="analyzing-experiments.html" />
+    <link rel="prev" title="Basic file loading operations" href="loading-files.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../intro.html" class="icon icon-home">
+            Python
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../user-guide.html">User guide</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../cell-cycling.html">The <code class="docutils literal notranslate"><span class="pre">cellcycling</span></code> module</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="loading-files.html">Basic file loading operations</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Accessing and computing properities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="analyzing-experiments.html">Analyzing complex expriments</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cyclic-voltammetry.html">The <code class="docutils literal notranslate"><span class="pre">echemsuite.cyclicvoltammetry</span></code> module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../graphicaltools.html">Using the <code class="docutils literal notranslate"><span class="pre">graphicaltools</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributor-guide.html">Contributor’s guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../release-notes.html">Release notes</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../intro.html">Python</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../intro.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../user-guide.html">User guide</a></li>
+          <li class="breadcrumb-item"><a href="../cell-cycling.html">The <code class="docutils literal notranslate"><span class="pre">cellcycling</span></code> module</a></li>
+      <li class="breadcrumb-item active">Accessing and computing properities</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/Guide/CellCycling/accessing-data.ipynb" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="accessing-and-computing-properities">
+<span id="cellcycling-accessingdata"></span><h1>Accessing and computing properities<a class="headerlink" href="#accessing-and-computing-properities" title="Permalink to this heading"></a></h1>
+<p>In this page a general overview on how to access the loaded data is provided. The page covers the following topics:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#ccad-introduction"><span class="std std-ref">Introduction on how to obtain the <code class="docutils literal notranslate"><span class="pre">CellCycling</span></code> object from a <code class="docutils literal notranslate"><span class="pre">FileManager</span></code> instance</span></a></p></li>
+<li><p><a class="reference internal" href="#ccad-hide"><span class="std std-ref">Use of the <code class="docutils literal notranslate"><span class="pre">hide</span></code> and <code class="docutils literal notranslate"><span class="pre">unhide</span></code> functions</span></a></p></li>
+<li><p><a class="reference internal" href="#ccad-cycles"><span class="std std-ref">Accessing the <code class="docutils literal notranslate"><span class="pre">Cycle</span></code> and <code class="docutils literal notranslate"><span class="pre">HalfCycle</span></code> objects</span></a></p></li>
+<li><p><a class="reference internal" href="#ccad-halfcycles-prop"><span class="std std-ref">Accessing the main attributes of the <code class="docutils literal notranslate"><span class="pre">HalfCycle</span></code> class</span></a></p></li>
+<li><p><a class="reference internal" href="#ccad-cycles-prop"><span class="std std-ref">Accessing the main attributes of the <code class="docutils literal notranslate"><span class="pre">Cycle</span></code> class</span></a></p></li>
+<li><p><a class="reference internal" href="#ccad-cellcycling-prop"><span class="std std-ref">Accessing the main attributes of the <code class="docutils literal notranslate"><span class="pre">CellCycling</span></code> class</span></a></p></li>
+</ul>
+<section id="introduction">
+<span id="ccad-introduction"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p>Once a <code class="docutils literal notranslate"><span class="pre">FileManager</span></code> instance has been created and the files have been parsed, all the experimental data can be extracted by directly invoking the generation of a <code class="docutils literal notranslate"><span class="pre">CellCycling</span></code> object by means of the <code class="docutils literal notranslate"><span class="pre">get_cellcycling</span></code> function. An exaple of a full workflows in reported in what follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">echemsuite.cellcycling.read_input</span> <span class="kn">import</span> <span class="n">FileManager</span>
+<span class="kn">from</span> <span class="nn">echemsuite.cellcycling.cycles</span> <span class="kn">import</span> <span class="n">CellCycling</span>
+
+<span class="c1"># Create a FileManager object and load/parse the example `.DTA` files</span>
+<span class="n">manager</span> <span class="o">=</span> <span class="n">FileManager</span><span class="p">()</span>
+<span class="n">manager</span><span class="o">.</span><span class="n">fetch_from_folder</span><span class="p">(</span><span class="s2">&quot;./example_DTA&quot;</span><span class="p">,</span> <span class="n">extension</span><span class="o">=</span><span class="s2">&quot;.DTA&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get the cellcycling object from the FileManager</span>
+<span class="n">cellcycling</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_cellcycling</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">cellcycling</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;echemsuite.cellcycling.cycles.CellCycling at 0x7fe41c6f20a0&gt;
+    ├─ timestamp:                 2022-07-23 20:25:33
+    ├─ total number of cycles:    5
+    ├─ number of visible cycles:  5
+    └─ reference cycle:           0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that the <code class="docutils literal notranslate"><span class="pre">CellCycling</span></code> object representing the cycling experiment has been obtained all the experimental data and derived quantities can be accessed using the built-in class methods.</p>
+<div class="admonition-the-clean-option admonition">
+<p class="admonition-title">The clean option</p>
+<p>Please notice that in the previously examined workflow all the cycle have been loaded and marked as visible. Sometimes, however, the user may want to hide some of the cycles based on the assumption that only full charge/discharge cycles with efficiencies lower than 100% have physical meaning. This can be done automatically setting to <code class="docutils literal notranslate"><span class="pre">True</span></code> the <code class="docutils literal notranslate"><span class="pre">clean</span></code> flag in the <code class="docutils literal notranslate"><span class="pre">get_cellcycling</span></code> function according to the syntax:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cellcycling</span> <span class="o">=</span> <span class="n">manager</span><span class="o">.</span><span class="n">get_cellcycling</span><span class="p">(</span><span class="n">clean</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will set the non-physical cycles to the hidden state. The effects of setting a cycle to the hidden state will be described in the next seciton.</p>
+</div>
+</section>
+<section id="hiding-unhiding-cycles">
+<span id="ccad-hide"></span><h2>Hiding/Unhiding cycles<a class="headerlink" href="#hiding-unhiding-cycles" title="Permalink to this heading"></a></h2>
+<p>Each cycle in the <code class="docutils literal notranslate"><span class="pre">CellCycling</span></code> object can be hidden in order to prevent access to its properties and be ignored while iterating on a cellcycling instance. This can be achieved by using the function hide. Hidden status of a given cycle can be unset using the function unhide. An example snippet of code is available in what follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hide the second cycle</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hiding cycle 1&quot;</span><span class="p">)</span>
+<span class="n">cellcycling</span><span class="o">.</span><span class="n">hide</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># Print a list containing the hidden state of each cycle</span>
+<span class="k">for</span> <span class="n">_cycle</span> <span class="ow">in</span> <span class="n">cellcycling</span><span class="o">.</span><span class="n">_cycles</span><span class="p">:</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;Hidden&quot;</span> <span class="k">if</span> <span class="n">_cycle</span><span class="o">.</span><span class="n">_hidden</span> <span class="k">else</span> <span class="s2">&quot;Visible&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cycle number </span><span class="si">{</span><span class="n">_cycle</span><span class="o">.</span><span class="n">number</span><span class="si">}</span><span class="s2"> is currently </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+<span class="c1"># Accessing the hidden cycle will result in a NoneType return (see the next section)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;*** Accessing hidden cycle ***&quot;</span><span class="p">)</span>
+<span class="n">hidden_cycle</span> <span class="o">=</span> <span class="n">cellcycling</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; -&gt; The function returned: </span><span class="si">{</span><span class="n">hidden_cycle</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Unhide the second cycle</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unhiding cycle 1&quot;</span><span class="p">)</span>
+<span class="n">cellcycling</span><span class="o">.</span><span class="n">unhide</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># Print a list containing the hidden state of each cycle</span>
+<span class="k">for</span> <span class="n">_cycle</span> <span class="ow">in</span> <span class="n">cellcycling</span><span class="o">.</span><span class="n">_cycles</span><span class="p">:</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;Hidden&quot;</span> <span class="k">if</span> <span class="n">_cycle</span><span class="o">.</span><span class="n">_hidden</span> <span class="k">else</span> <span class="s2">&quot;Visible&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cycle number </span><span class="si">{</span><span class="n">_cycle</span><span class="o">.</span><span class="n">number</span><span class="si">}</span><span class="s2"> is currently </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hiding cycle 1
+Cycle number 0 is currently Visible
+Cycle number 1 is currently Hidden
+Cycle number 2 is currently Visible
+Cycle number 3 is currently Visible
+Cycle number 4 is currently Visible
+
+*** Accessing hidden cycle ***
+ERROR: cycle 1 is currently hidden.
+To reinstate it, use the unhide() function
+ -&gt; The function returned: None
+
+Unhiding cycle 1
+Cycle number 0 is currently Visible
+Cycle number 1 is currently Visible
+Cycle number 2 is currently Visible
+Cycle number 3 is currently Visible
+Cycle number 4 is currently Visible
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="accessing-a-cycle-and-its-halfcycles">
+<span id="ccad-cycles"></span><h2>Accessing a <code class="docutils literal notranslate"><span class="pre">Cycle</span></code> and its <code class="docutils literal notranslate"><span class="pre">HalfCycles</span></code><a class="headerlink" href="#accessing-a-cycle-and-its-halfcycles" title="Permalink to this heading"></a></h2>
+<p>As the name implies, the <code class="docutils literal notranslate"><span class="pre">CellCycling</span></code> object represents a collection of charge/discharge cycles. Each cycle is defined by a <code class="docutils literal notranslate"><span class="pre">Cycle</span></code> object that can be accessed either directly by index, leaving to the user the task of verifying its hidden status, or by using the built in <code class="docutils literal notranslate"><span class="pre">CellCycling</span></code> class iterator that will return sequentially all the non-hidden cycles.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Accessing the second cycle by index</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;*** Getting cycle at index 1: </span><span class="si">{</span><span class="n">cellcycling</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Accessing the cycles by iterator</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;*** Accessing the cycles by iterator&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">cycle</span> <span class="ow">in</span> <span class="n">cellcycling</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cycle</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+<span class="c1"># Hiding the second cycle</span>
+<span class="n">cellcycling</span><span class="o">.</span><span class="n">hide</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># Accessing the second cycle by index (will print an error and return None)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;*** Getting cycle at index 1: </span><span class="si">{</span><span class="n">cellcycling</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Accessing the cycles by iterator</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;*** Accessing the cycles by iterator&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">cycle</span> <span class="ow">in</span> <span class="n">cellcycling</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cycle</span><span class="p">)</span>
+
+<span class="c1"># Un-hiding the second cycle</span>
+<span class="n">cellcycling</span><span class="o">.</span><span class="n">unhide</span><span class="p">([</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>*** Getting cycle at index 1: 
+&lt;echemsuite.cellcycling.cycles.Cycle at 0x7fe3ef3d2d60&gt;
+    ├─ number:     1
+    ├─ halfcycles: Both charge and discharge
+    └─ hidden:     False
+
+*** Accessing the cycles by iterator
+
+&lt;echemsuite.cellcycling.cycles.Cycle at 0x7fe41c6f2100&gt;
+    ├─ number:     0
+    ├─ halfcycles: Both charge and discharge
+    └─ hidden:     False
+
+&lt;echemsuite.cellcycling.cycles.Cycle at 0x7fe3ef3d2d60&gt;
+    ├─ number:     1
+    ├─ halfcycles: Both charge and discharge
+    └─ hidden:     False
+
+&lt;echemsuite.cellcycling.cycles.Cycle at 0x7fe3e78ad610&gt;
+    ├─ number:     2
+    ├─ halfcycles: Both charge and discharge
+    └─ hidden:     False
+
+&lt;echemsuite.cellcycling.cycles.Cycle at 0x7fe3e78acca0&gt;
+    ├─ number:     3
+    ├─ halfcycles: Both charge and discharge
+    └─ hidden:     False
+
+&lt;echemsuite.cellcycling.cycles.Cycle at 0x7fe3e78acee0&gt;
+    ├─ number:     4
+    ├─ halfcycles: Both charge and discharge
+    └─ hidden:     False
+
+ERROR: cycle 1 is currently hidden.
+To reinstate it, use the unhide() function
+*** Getting cycle at index 1: None
+
+*** Accessing the cycles by iterator
+
+&lt;echemsuite.cellcycling.cycles.Cycle at 0x7fe41c6f2100&gt;
+    ├─ number:     0
+    ├─ halfcycles: Both charge and discharge
+    └─ hidden:     False
+
+&lt;echemsuite.cellcycling.cycles.Cycle at 0x7fe3e78ad610&gt;
+    ├─ number:     2
+    ├─ halfcycles: Both charge and discharge
+    └─ hidden:     False
+
+&lt;echemsuite.cellcycling.cycles.Cycle at 0x7fe3e78acca0&gt;
+    ├─ number:     3
+    ├─ halfcycles: Both charge and discharge
+    └─ hidden:     False
+
+&lt;echemsuite.cellcycling.cycles.Cycle at 0x7fe3e78acee0&gt;
+    ├─ number:     4
+    ├─ halfcycles: Both charge and discharge
+    └─ hidden:     False
+</pre></div>
+</div>
+</div>
+</div>
+<p>Once a <code class="docutils literal notranslate"><span class="pre">Cycle</span></code> object has been obtained from the <code class="docutils literal notranslate"><span class="pre">CellCycling</span></code> container the charge and discharge <code class="docutils literal notranslate"><span class="pre">HalfCycles</span></code> can be accessed directly according to the syntax:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first_cycle</span> <span class="o">=</span> <span class="n">cellcycling</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">first_cycle</span><span class="o">.</span><span class="n">charge</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">first_cycle</span><span class="o">.</span><span class="n">discharge</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;echemsuite.cellcycling.cycles.HalfCycle at 0x7fe3e7811370&gt;
+    ├─ timestamp: 2022-07-23 20:25:33
+    ├─ type:      charge
+    └─ points:    2850
+
+&lt;echemsuite.cellcycling.cycles.HalfCycle at 0x7fe3e7812160&gt;
+    ├─ timestamp: 2022-07-24 00:23:03
+    ├─ type:      discharge
+    └─ points:    2566
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-halfcycle-properties">
+<span id="ccad-halfcycles-prop"></span><h2>The <code class="docutils literal notranslate"><span class="pre">HalfCycle</span></code> properties<a class="headerlink" href="#the-halfcycle-properties" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">HalfCycle</span></code> object represents the base-building block of the <code class="docutils literal notranslate"><span class="pre">cellcycling.cycles</span></code> sub-module and, as discussed in more detail in the <a class="reference internal" href="../../API/api_cellcycling_cycles.html#api-cellcycling-cycles"><span class="std std-ref">API reference</span></a>, it holds all the experimental data of a charge/discharge process namely:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">time</span></code> (<code class="docutils literal notranslate"><span class="pre">pandas.core.series.Series</span></code>) time steps in seconds at which the experimental data have been collected</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">voltage</span></code> (<code class="docutils literal notranslate"><span class="pre">pandas.core.series.Series</span></code>) voltage in V recorded at each time step</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">current</span></code> (<code class="docutils literal notranslate"><span class="pre">pandas.core.series.Series</span></code>) currents in A recorded at each time step</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">power</span></code> (<code class="docutils literal notranslate"><span class="pre">pandas.core.series.Series</span></code>) instantaneous power in W computed at each time step</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">energy</span></code> (<code class="docutils literal notranslate"><span class="pre">pandas.core.series.Series</span></code>) instantaneous energy in mWh computed at each time step</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Q</span></code> (<code class="docutils literal notranslate"><span class="pre">pandas.core.series.Series</span></code>) cumulative charge in mAh computed at each time step</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">capacity</span></code> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) total capacity in mAh used in the halfcyle</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">total_energy</span></code> (<code class="docutils literal notranslate"><span class="pre">float</span></code>) total energy in mWh generated/dissipated in the halfcyle</p></li>
+</ul>
+<p>All the properties can be accessed with the provided getter function. For example, the voltage profile of each half cycle as function of the capacity can be plotted as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">cycle</span> <span class="ow">in</span> <span class="n">cellcycling</span><span class="p">:</span>
+    <span class="n">charge</span> <span class="o">=</span> <span class="n">cycle</span><span class="o">.</span><span class="n">charge</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">charge</span><span class="o">.</span><span class="n">Q</span><span class="p">,</span> <span class="n">charge</span><span class="o">.</span><span class="n">voltage</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Cycle </span><span class="si">{</span><span class="n">cycle</span><span class="o">.</span><span class="n">number</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Charge&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Charge (mAh)&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Voltage (V)&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">which</span><span class="o">=</span><span class="s2">&quot;major&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;#DDDDDD&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">cycle</span> <span class="ow">in</span> <span class="n">cellcycling</span><span class="p">:</span>
+    <span class="n">discharge</span> <span class="o">=</span> <span class="n">cycle</span><span class="o">.</span><span class="n">discharge</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">discharge</span><span class="o">.</span><span class="n">Q</span><span class="p">,</span> <span class="n">discharge</span><span class="o">.</span><span class="n">voltage</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Cycle </span><span class="si">{</span><span class="n">cycle</span><span class="o">.</span><span class="n">number</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Disharge&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Charge (mAh)&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Voltage (V)&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">which</span><span class="o">=</span><span class="s2">&quot;major&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;#DDDDDD&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/e16fe02217d6716104988da5d563daaa39edd48ab7eb9968d7eba38fa6914b04.png" src="../../_images/e16fe02217d6716104988da5d563daaa39edd48ab7eb9968d7eba38fa6914b04.png" />
+</div>
+</div>
+</section>
+<section id="the-cycle-properties">
+<span id="ccad-cycles-prop"></span><h2>The <code class="docutils literal notranslate"><span class="pre">Cycle</span></code> properties<a class="headerlink" href="#the-cycle-properties" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Cycle</span></code> object wraps the charge and discharge <code class="docutils literal notranslate"><span class="pre">HalfCycles</span></code> exposing, as a unified time-series, all the experimental data previously discussed for the <code class="docutils literal notranslate"><span class="pre">HalfCycle</span></code> object. As such the following properties are available:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">time</span></code> (<code class="docutils literal notranslate"><span class="pre">pandas.core.series.Series</span></code>) time steps in seconds at which the experimental data have been collected</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">voltage</span></code> (<code class="docutils literal notranslate"><span class="pre">pandas.core.series.Series</span></code>) voltage in V recorded at each time step</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">current</span></code> (<code class="docutils literal notranslate"><span class="pre">pandas.core.series.Series</span></code>) currents in A recorded at each time step</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">power</span></code> (<code class="docutils literal notranslate"><span class="pre">pandas.core.series.Series</span></code>) instantaneous power in W computed at each time step</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">energy</span></code> (<code class="docutils literal notranslate"><span class="pre">pandas.core.series.Series</span></code>) instantaneous energy in mWh computed at each time step</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Q</span></code> (<code class="docutils literal notranslate"><span class="pre">pandas.core.series.Series</span></code>) cumulative charge in mAh computed at each time step</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">Cycle</span></code> object also exposes new properties to the user such as the <code class="docutils literal notranslate"><span class="pre">coulomb_efficiency</span></code>, the <code class="docutils literal notranslate"><span class="pre">energy_efficiency</span></code> and the <code class="docutils literal notranslate"><span class="pre">voltage_efficiency</span></code> that can be easily obtained according to:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">cycle</span> <span class="ow">in</span> <span class="n">cellcycling</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cycle: </span><span class="si">{</span><span class="n">cycle</span><span class="o">.</span><span class="n">number</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    - Coulomb efficiency: </span><span class="si">{:.2f}</span><span class="s2">%&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cycle</span><span class="o">.</span><span class="n">coulomb_efficiency</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    - Energy efficiency: </span><span class="si">{:.2f}</span><span class="s2">%&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cycle</span><span class="o">.</span><span class="n">energy_efficiency</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    - Voltage efficiency:  </span><span class="si">{:.2f}</span><span class="s2">%&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cycle</span><span class="o">.</span><span class="n">voltage_efficiency</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cycle: 0
+    - Coulomb efficiency: 90.07%
+    - Energy efficiency: 63.99%
+    - Voltage efficiency:  71.05%
+
+Cycle: 1
+    - Coulomb efficiency: 90.87%
+    - Energy efficiency: 61.36%
+    - Voltage efficiency:  67.53%
+
+Cycle: 2
+    - Coulomb efficiency: 91.17%
+    - Energy efficiency: 59.89%
+    - Voltage efficiency:  65.69%
+
+Cycle: 3
+    - Coulomb efficiency: 91.34%
+    - Energy efficiency: 56.54%
+    - Voltage efficiency:  61.90%
+
+Cycle: 4
+    - Coulomb efficiency: 91.50%
+    - Energy efficiency: 54.09%
+    - Voltage efficiency:  59.11%
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-cellcycling-properties">
+<span id="ccad-cellcycling-prop"></span><h2>The <code class="docutils literal notranslate"><span class="pre">CellCycling</span></code> properties<a class="headerlink" href="#the-cellcycling-properties" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">CellCycling</span></code> class exposes, as lists, all the properties related to its <code class="docutils literal notranslate"><span class="pre">Cycles</span></code> objects such as:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">coulomb_efficiencies</span></code> (<code class="docutils literal notranslate"><span class="pre">List[float]</span></code>) list of the <code class="docutils literal notranslate"><span class="pre">coulomb_efficiency</span></code> associated to each cycle</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">energy_efficiencies</span></code> (<code class="docutils literal notranslate"><span class="pre">List[float]</span></code>) list of the <code class="docutils literal notranslate"><span class="pre">energy_efficiency</span></code> associated to each cycle</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">voltage_efficiencies</span></code> (<code class="docutils literal notranslate"><span class="pre">List[float]</span></code>) list of the <code class="docutils literal notranslate"><span class="pre">voltage_efficiency</span></code> associated to each cycle</p></li>
+</ul>
+<p>As an example let us print the efficiency data previously listed for each cycle:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">cellcycling</span><span class="o">.</span><span class="n">coulomb_efficiencies</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cellcycling</span><span class="o">.</span><span class="n">energy_efficiencies</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cellcycling</span><span class="o">.</span><span class="n">voltage_efficiencies</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[90.06999917150961, 90.86607294184074, 91.17491744273714, 91.34470444898423, 91.49817119542074]
+[63.99222869627161, 61.36387929231566, 59.89401879224805, 56.544915356531746, 54.08621790034328]
+[71.04721803585099, 67.53222331022482, 65.69133317818992, 61.902784291246924, 59.11180211987686]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">CellCycling</span></code> class also allows the user to evaluate the capacity retention of the cell in respect to a selected <code class="docutils literal notranslate"><span class="pre">reference</span></code> cycle.
+This can be easily done according to:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Capacity retentions taking the first cycle (default) as reference</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Capacity retentions with the </span><span class="si">{</span><span class="n">cellcycling</span><span class="o">.</span><span class="n">reference</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">° cycle as reference:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cellcycling</span><span class="o">.</span><span class="n">capacity_retention</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+<span class="c1"># Capacity retentions taking the second cycle as reference</span>
+<span class="n">cellcycling</span><span class="o">.</span><span class="n">reference</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Capacity retentions with the </span><span class="si">{</span><span class="n">cellcycling</span><span class="o">.</span><span class="n">reference</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">° cycle as reference:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cellcycling</span><span class="o">.</span><span class="n">capacity_retention</span><span class="p">)</span>
+
+<span class="c1"># Resetting the reference to the default value</span>
+<span class="n">cellcycling</span><span class="o">.</span><span class="n">reference</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Capacity retentions with the 1° cycle as reference:
+[100.0, 66.31129143419594, 45.17965091742888, 30.863787136532938, 21.534248858973896]
+
+Capacity retentions with the 2° cycle as reference:
+[150.8038794557863, 100.0, 68.13266630806451, 46.54378834886762, 32.474482690996034]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The capacity retention values can be fit using a linear regression. Once the data have been fitted, the <code class="docutils literal notranslate"><span class="pre">capacity_fade</span></code> rate is automatically computed as the absolute value of the fitting-line slope. An example on how the fitting can be done and how the data can be plotted is reported in what follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Run the fitting procedure on all the cycles</span>
+<span class="n">cellcycling</span><span class="o">.</span><span class="n">fit_retention</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># Print the computed capacity fade:</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Fitted capacity fade: </span><span class="si">{</span><span class="n">cellcycling</span><span class="o">.</span><span class="n">capacity_fade</span><span class="si">}</span><span class="s2"> %/cycle&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create a figure</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+
+<span class="c1"># Plot the capacity retention of each cycle</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">cellcycling</span><span class="o">.</span><span class="n">numbers</span><span class="p">,</span> <span class="n">cellcycling</span><span class="o">.</span><span class="n">capacity_retention</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Values&quot;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># Plot the linear fitting line</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">cellcycling</span><span class="o">.</span><span class="n">fit_parameters</span>
+<span class="n">X</span> <span class="o">=</span> <span class="p">[</span><span class="n">cellcycling</span><span class="o">.</span><span class="n">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cellcycling</span><span class="o">.</span><span class="n">numbers</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">slope</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="n">p</span><span class="o">.</span><span class="n">intercept</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Linear fit&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Cycle number&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Capacity retention (%)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">which</span><span class="o">=</span><span class="s2">&quot;major&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;#DDDDDD&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO: fitting Capacity Retention data from cycle 0 to 4
+INFO: fit equation: retention = -22.854027910716823 * cycle_number + 94.86972423811469
+INFO: R^2 = 0.9647304680876875
+
+Fitted capacity fade: 22.854027910716823 %/cycle
+</pre></div>
+</div>
+<img alt="../../_images/b214bdb3eba32326348fa2eb81c485491a2787c1145ed62cf2389f01eb9d803e.png" src="../../_images/b214bdb3eba32326348fa2eb81c485491a2787c1145ed62cf2389f01eb9d803e.png" />
+</div>
+</div>
+<p>Given the fitting data, the user can also predict, using the <code class="docutils literal notranslate"><span class="pre">predict_retention</span></code> function, the capacity retention expected at a given cycle number and estimate, by calling the <code class="docutils literal notranslate"><span class="pre">retention_threshold</span></code> function, the cycle number at which the degradation in capacity retention will exceed a given threshold. An example snippet of code is reported in what follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Predicting the retention</span>
+<span class="n">cycle_number</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">prediction</span> <span class="o">=</span> <span class="n">cellcycling</span><span class="o">.</span><span class="n">predict_retention</span><span class="p">([</span><span class="n">cycle_number</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The predicted retention at cycle number </span><span class="si">{</span><span class="n">cycle_number</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+
+<span class="c1"># Predicting retention thresholds</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">prediction</span> <span class="o">=</span> <span class="n">cellcycling</span><span class="o">.</span><span class="n">retention_threshold</span><span class="p">([</span><span class="n">threshold</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The capacity retention will reach the </span><span class="si">{</span><span class="n">threshold</span><span class="si">}</span><span class="s2">% threshold after cycle </span><span class="si">{</span><span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The predicted retention at cycle number 3 is 26.31%
+The capacity retention will reach the 40% threshold after cycle 2
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Guide/CellCycling"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="loading-files.html" class="btn btn-neutral float-left" title="Basic file loading operations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="analyzing-experiments.html" class="btn btn-neutral float-right" title="Analyzing complex expriments" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
